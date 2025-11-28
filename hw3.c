@@ -1,6 +1,42 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <time.h>
+
+void to_upper(char *str) {
+    int len = strlen(str);
+    for (int i = 0; i < len; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+void to_lower(char *str) {
+    int len = strlen(str);
+    for (int i = 0; i < len; i++) {
+        str[i] = tolower(str[i]);
+    }
+}
+
+void string_change() {
+    char str[100];
+    char str1[100];
+
+    printf("소문자 문자열 입력: ");
+    scanf("%s", str);
+
+    to_upper(str);
+
+    printf("대문자 변환: %s\n", str);
+
+    printf("대문자 문자열 입력: ");
+    scanf("%s", str1);
+
+    to_lower(str1);
+
+    printf("소문자 변환: %s\n", str1);
+}
+
 
 void generate_random_password(char *password, size_t length)
 {
