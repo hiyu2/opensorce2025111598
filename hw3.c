@@ -1,8 +1,10 @@
+#pragma warning(disable:4996)
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <time.h>
+#define PASSWORD_LEN 12
 
 
 void simple_calculator(void)
@@ -23,27 +25,27 @@ void simple_calculator(void)
     }
 
     switch (op) {
-        case '+':
-            result = a + b;
-            break;
-        case '-':
-            result = a - b;
-            break;
-        case '*':
-        case 'x':
-        case 'X':
-            result = a * b;
-            break;
-        case '/':
-            if (b == 0) {
-                printf("0으로 나눌 수 없습니다.\n");
-                return;
-            }
-            result = a / b;
-            break;
-        default:
-            printf("지원하지 않는 연산자입니다. (+, -, *, / 만 사용)\n");
+    case '+':
+        result = a + b;
+        break;
+    case '-':
+        result = a - b;
+        break;
+    case '*':
+    case 'x':
+    case 'X':
+        result = a * b;
+        break;
+    case '/':
+        if (b == 0) {
+            printf("0으로 나눌 수 없습니다.\n");
             return;
+        }
+        result = a / b;
+        break;
+    default:
+        printf("지원하지 않는 연산자입니다. (+, -, *, / 만 사용)\n");
+        return;
     }
 
     printf("결과: %.2f %c %.2f = %.2f\n", a, op, b, result);
@@ -55,59 +57,59 @@ void average_cal(void)
     int add = 0;
     int total = 0;
     int count = 0;
-    double result = 0.0; 
+    double result = 0.0;
 
     printf("\n====== 점수 평균 계산기 ======\n");
     printf("점수들을 1개씩 입력해주세요.\n");
     printf("입력 완료시 -1을 입력해주세요.\n");
     printf("\n");
 
-    while (1) 
+    while (1)
     {
         printf("점수 입력 (종료: -1): ");
-        
-        if (scanf("%d", &add) != 1) 
+
+        if (scanf("%d", &add) != 1)
         {
             printf("\n유효하지 않은 입력입니다. 정수를 입력해 주세요.\n");
             while (getchar() != '\n');
             break;
         }
 
-        if (add == -1) 
+        if (add == -1)
         {
-            break; 
+            break;
         }
 
         total += add;
         count += 1;
     }
 
-    if (count > 0) 
+    if (count > 0)
     {
-        result = (double)total / count; 
-        
+        result = (double)total / count;
+
         printf("\n============================\n");
         printf("총 입력된 점수 개수: %d\n", count);
         printf("점수들의 총합: %d\n", total);
-        printf("점수들의 평균: %.2f\n", result); 
+        printf("점수들의 평균: %.2f\n", result);
         printf("============================\n");
-    } 
-    else 
+    }
+    else
     {
         printf("\n입력된 점수가 없어 평균을 계산할 수 없습니다.\n");
         printf("메인 메뉴로 돌아갑니다.\n");
     }
 }
 
-void to_upper(char *str) {
-    int len = strlen(str);
+void to_upper(char* str) {
+    size_t len = strlen(str);
     for (int i = 0; i < len; i++) {
         str[i] = toupper(str[i]);
     }
 }
 
-void to_lower(char *str) {
-    int len = strlen(str);
+void to_lower(char* str) {
+    size_t len = strlen(str);
     for (int i = 0; i < len; i++) {
         str[i] = tolower(str[i]);
     }
@@ -134,18 +136,18 @@ void string_change() {
 
 void converter_menu()
 {
-	double cm, m;
-	int result;
-	printf("센티미터(cm)를 입력하세요.");
-	result = scanf("%lf", &cm);
-	if (result != 1){
-		printf("입력이 올바르지 않습니다.\n");
-		return;
-	}
-	m = cm / 100.0;
-	printf("%.2f cm는 %.2f m 입니다.\n", cm, m);
+    double cm, m;
+    int result;
+    printf("센티미터(cm)를 입력하세요.");
+    result = scanf("%lf", &cm);
+    if (result != 1) {
+        printf("입력이 올바르지 않습니다.\n");
+        return;
+    }
+    m = cm / 100.0;
+    printf("%.2f cm는 %.2f m 입니다.\n", cm, m);
 }
-void generate_random_password(char *password, size_t length)
+void generate_random_password(char* password, size_t length)
 {
     const char charset[] =
         "abcdefghijklmnopqrstuvwxyz"
@@ -163,12 +165,11 @@ void generate_random_password(char *password, size_t length)
 
 void password_menu(void)
 {
-    size_t password_length = 12;
-    char password[password_length + 1];
+    char password[PASSWORD_LEN + 1];
 
     srand((unsigned int)time(NULL));
 
-    generate_random_password(password, password_length);
+    generate_random_password(password, PASSWORD_LEN);
 
     printf("\n====== 랜덤 비밀번호 생성기 ======\n");
     printf("생성된 비밀번호: %s\n", password);
@@ -176,11 +177,11 @@ void password_menu(void)
 }
 
 
-int main(void) 
+int main(void)
 {
     int menu;
 
-    while (1) 
+    while (1)
     {
         printf("\n==== 메인 메뉴 ====\n");
         printf("1) 단위 변환기\n");
@@ -191,49 +192,49 @@ int main(void)
         printf("6) 종료\n");
         printf("\n선택: ");
 
-        if (scanf("%d", &menu) != 1) 
+        if (scanf("%d", &menu) != 1)
         {
             printf("\n1~6의 정수를 입력해주세요.\n");
             while (getchar() != '\n');
             break;
         }
 
-        if (menu < 1 || menu > 6) 
+        if (menu < 1 || menu > 6)
         {
             printf("\n1~6의 정수를 입력해주세요.\n");
             continue;
         }
 
-        switch (menu) 
+        switch (menu)
         {
-            case 1:
-                printf("\n단위 변환기를 실행합니다.\n");
-                converter_menu();
-				break;
+        case 1:
+            printf("\n단위 변환기를 실행합니다.\n");
+            converter_menu();
+            break;
 
-            case 2:
-                printf("\n간단 계산기를 실행합니다.\n");
-				simple_calculator();
-                break;
+        case 2:
+            printf("\n간단 계산기를 실행합니다.\n");
+            simple_calculator();
+            break;
 
-            case 3:
-                printf("\n점수 평균 계산기를 실행합니다.\n");
-                average_cal();
-                break;
+        case 3:
+            printf("\n점수 평균 계산기를 실행합니다.\n");
+            average_cal();
+            break;
 
-            case 4:
-                printf("\n문자열 처리를 실행합니다.\n");
-                string_change();
-                break;
+        case 4:
+            printf("\n문자열 처리를 실행합니다.\n");
+            string_change();
+            break;
 
-            case 5:
-                printf("\n랜덤 비밀번호 생성기를 실행합니다.\n");
-                password_menu(); 
-                break;
+        case 5:
+            printf("\n랜덤 비밀번호 생성기를 실행합니다.\n");
+            password_menu();
+            break;
 
-            case 6:
-                printf("\n미니 도구 모음팩을 종료합니다.\n");
-                return 0;
+        case 6:
+            printf("\n미니 도구 모음팩을 종료합니다.\n");
+            return 0;
         }
     }
 
