@@ -86,7 +86,19 @@ void string_change() {
     printf("소문자 변환: %s\n", str1);
 }
 
-
+void converter_menu()
+{
+	double cm, m;
+	int result;
+	printf("센티미터(cm)를 입력하세요.");
+	result = scanf("%lf", &cm);
+	if (result != 1){
+		printf("입력이 올바르지 않습니다.\n");
+		return 1;
+	}
+	m = cm / 100.0;
+	printf("%.2f cm는 %.2f m 입니다.\n", cm, m);
+}
 void generate_random_password(char *password, size_t length)
 {
     const char charset[] =
@@ -150,7 +162,8 @@ int main(void)
         {
             case 1:
                 printf("\n단위 변환기를 실행합니다.\n");
-                break;
+                converter_menu();
+		break;
 
             case 2:
                 printf("\n간단 계산기를 실행합니다.\n");
