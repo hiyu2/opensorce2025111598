@@ -4,6 +4,54 @@
 #include <stdlib.h>
 #include <time.h>
 
+// 간단 계산기 함수 구현
+void simple_calculator(void)
+{
+    double a, b, result;
+    char op;
+    int status;
+
+    printf("\n====== 간단 계산기 ======\n");
+    printf("예)  3 + 5  처럼 공백을 넣어서 입력하세요.\n");
+    printf("수식 입력 (숫자 연산자 숫자): ");
+
+    // 숫자 연산자 숫자 형태로 입력 받기
+    status = scanf("%lf %c %lf", &a, &op, &b);
+    if (status != 3) {
+        printf("입력이 올바르지 않습니다. 예: 3 + 5\n");
+        // 버퍼 비우기
+        while (getchar() != '\n');
+        return;
+    }
+
+    switch (op) {
+        case '+':
+            result = a + b;
+            break;
+        case '-':
+            result = a - b;
+            break;
+        case '*':
+        case 'x':
+        case 'X':
+            result = a * b;
+            break;
+        case '/':
+            if (b == 0) {
+                printf("0으로 나눌 수 없습니다.\n");
+                return;
+            }
+            result = a / b;
+            break;
+        default:
+            printf("지원하지 않는 연산자입니다. (+, -, *, / 만 사용)\n");
+            return;
+    }
+
+    printf("결과: %.2f %c %.2f = %.2f\n", a, op, b, result);
+}
+
+
 void average_cal(void)
 {
     int add = 0;
@@ -167,6 +215,7 @@ int main(void)
 
             case 2:
                 printf("\n간단 계산기를 실행합니다.\n");
+				simple_calculator();
                 break;
 
             case 3:
