@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-// 간단 계산기 함수 구현
+
 void simple_calculator(void)
 {
     double a, b, result;
@@ -15,11 +15,9 @@ void simple_calculator(void)
     printf("예)  3 + 5  처럼 공백을 넣어서 입력하세요.\n");
     printf("수식 입력 (숫자 연산자 숫자): ");
 
-    // 숫자 연산자 숫자 형태로 입력 받기
     status = scanf("%lf %c %lf", &a, &op, &b);
     if (status != 3) {
         printf("입력이 올바르지 않습니다. 예: 3 + 5\n");
-        // 버퍼 비우기
         while (getchar() != '\n');
         return;
     }
@@ -142,7 +140,7 @@ void converter_menu()
 	result = scanf("%lf", &cm);
 	if (result != 1){
 		printf("입력이 올바르지 않습니다.\n");
-		return 1;
+		return;
 	}
 	m = cm / 100.0;
 	printf("%.2f cm는 %.2f m 입니다.\n", cm, m);
@@ -211,7 +209,7 @@ int main(void)
             case 1:
                 printf("\n단위 변환기를 실행합니다.\n");
                 converter_menu();
-		break;
+				break;
 
             case 2:
                 printf("\n간단 계산기를 실행합니다.\n");
@@ -220,12 +218,12 @@ int main(void)
 
             case 3:
                 printf("\n점수 평균 계산기를 실행합니다.\n");
-                average_calc();
+                average_cal();
                 break;
 
             case 4:
                 printf("\n문자열 처리를 실행합니다.\n");
-                string_chagne();
+                string_change();
                 break;
 
             case 5:
